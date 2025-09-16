@@ -1,0 +1,6 @@
+ACTOR BD_CrispyHUD_Level_Info 		: Inventory { Inventory.Amount 1 Inventory.MaxAmount 1 }
+ACTOR BD_CrispyHUD_Armor_Absoption 	: Inventory { Inventory.Amount 1 Inventory.MaxAmount 1 }
+ACTOR BD_CrispyHUD_Highlight_Arms	: Inventory { Inventory.Amount 1 Inventory.MaxAmount 1 }
+ACTOR BD_CrispyHUD_Highlight_Ammos	: Inventory { Inventory.Amount 1 Inventory.MaxAmount 1 }
+ACTOR BD_CrispyHUD_ShowMugshot		: Inventory { Inventory.Amount 1 Inventory.MaxAmount 1 }
+ACTOR BD_CrispyHUD_BoomColors		: Inventory { Inventory.Amount 1 Inventory.MaxAmount 1 }

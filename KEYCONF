@@ -1,0 +1,3 @@
+addkeysection "BD_CRISPYHUD" CRISPYHUD_MENU
+addmenukey 	  "$BD_CRISPY_HUD_TITLE" "openmenu CRISPYHUD_MENU"
+defaultbind \ "+sthud_open"

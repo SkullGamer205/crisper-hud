@@ -1,0 +1,9 @@
+[enu eng en default]
+
+BD_CRISPY_HUD_TITLE    		= "Crisper HUD Settings"				;
+BD_CRISPY_HUD_VERSION  		= "v2025.09.16"							;
+BD_CRISPY_ARMOR_ABSOR 		= "Show armor absorption"				;
+BD_CRISPY_LEVELINFO    		= "Show Level info"						;
+BD_CRISPY_BOOM_COLORS  		= "Boom colors"							;
+BD_CRISPY_HIGHLIGHTARMS		= "Highlight current ARMS"				;
+BD_CRISPY_HIGHLIGHTAMMOS	= "Highlight current AMMO"				;

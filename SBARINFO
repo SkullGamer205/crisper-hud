@@ -1,0 +1,534 @@
+// Basic Stuff
+Base Doom;
+height 32;
+monospacefonts true, "0";
+Resolution 320, 200;
+LowerHealthCap true;
+
+statusbar normal // Standard Doom Status bar
+{
+InInventory IsPlayer,1 {
+	drawimage "STBARBD", 0, 168;
+	drawimage "STTPRCNT", 90, 171;
+	drawimage "STTPRCNT", 221, 171;
+
+		drawswitchableimage weaponslot 2, "STGNU22", "STYSNU22", 111, 172;
+		drawswitchableimage weaponslot 3, "STGNU23", "STYSNU23", 123, 172;
+		drawswitchableimage weaponslot 4, "STGNU24", "STYSNU24", 135, 172;
+		drawswitchableimage weaponslot 5, "STGNU25", "STYSNU25", 111, 182;
+		drawswitchableimage weaponslot 6, "STGNU26", "STYSNU26", 123, 182;
+		drawswitchableimage weaponslot 7, "STGNU27", "STYSNU27", 135, 182;
+
+	InInventory not NoReloading,1 || IsPlayingAsPurist,1
+		{
+		UsesSecondaryAmmo
+			{
+			DrawImage "STMAG",-49,168;
+			drawnumber 3, HUDFONT_DOOM, untranslated, ammo2, alignment(center), -25, 171;
+			drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+			}
+		}
+		
+	InInventory NoReloading,1 || IsPlayingAsPurist,1
+	{
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	}
+	/*InInventory IsPlayingAsPurist,1
+	{
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	}*/
+
+	UsesSecondaryAmmo not
+	{
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	}
+
+	IsSelected "TankGun","ArtilleryTankGun"
+	{
+		DrawImage "STMAG",-49,168;
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo2, alignment(center), -25, 171;
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	}
+
+	IsSelected "attackhelicopterGun"
+	{
+		DrawImage "STMAG",-49,168;
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo2, alignment(center), -25, 171;
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	}
+
+	/*	IsSelected "Rifle"
+		{
+			DrawImage "STMAG",-49,168;
+			InInventory not NoReloading,1
+			{
+			drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoRocket,-25, 171;
+			}
+			else
+			{
+			drawnumber 3, HUDFONT_DOOM, untranslated, ammo AmmoRocket, -25, 171;
+			}
+		} */ //you don't need this on the normal status bar.
+
+	drawnumber 3, HUDFONT_DOOM, untranslated, health, 90, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, armor, 221, 171;
+
+	//keys
+	drawswitchableimage keyslot 2 && 5, "nullimage", "STKEYS0", "STKEYS3", "STKEYS6", 239, 171;
+	drawswitchableimage keyslot 3 && 6, "nullimage", "STKEYS1", "STKEYS4", "STKEYS7", 239, 181;
+	drawswitchableimage keyslot 1 && 4, "nullimage", "STKEYS2", "STKEYS5", "STKEYS8", 239, 191;
+
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Clip1, 284, 170;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Clip2, 284, 176;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoShell, 284, 182;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoRocket, 284, 188;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoCell, 284, 194;
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo GrenadeAmmo, 319, 170;
+	drawnumber 3, INDEXFONT_DOOM, LightBlue, ammo FreezenadeAmmo, whennotzero, 314, 170;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Gas, 319, 176;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo MiniHellRocketAmmo, 319, 182;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo SoulAmmo, 319, 188;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Nuke, 319, 194;
+	gamemode deathmatch, teamgame
+	{
+		drawnumber 2, HUDFONT_DOOM, untranslated, frags, 138, 171;
+	}
+
+
+	InInventory Not IsNOTTacticalClass, 1 || InfiniteSprint, 1
+	{
+		// STAMINA //
+		//drawnumber 4, SMALLFONT, white, Ammo UsedStamina, whennotzero | interpolate(4), drawshadow, alignment(center), 160, 160, 0;
+		DrawImage "STAMICON", 357, 189;
+		DrawBar "STAMBAR", "STAMBAR2", Ammo UsedStamina, vertical, reverse, 358, 169;
+	}
+
+	// INVISIBILITY //
+	//drawnumber 4, SMALLFONT, Blue, PowerupTime BlurSphere, whennotzero, drawshadow, alignment(center), 60, 160, 0;
+	InInventory PowerInvisibility, 1
+	{
+		DrawImage "SBARINVS", 323, 169;
+		DrawBar "SBARRED", "SBARBACK", PowerupTime BlurSphere, horizontal, interpolate(10), 331, 171;
+	}
+	// INVULNERABILITY //
+	//drawnumber 4, SMALLFONT, Black, PowerupTime InvulnerabilitySphere, drawshadow, whennotzero, alignment(center), 40, 160, 0;
+	InInventory PowerInvulnerable, 1
+	{
+		DrawImage "SBARINVU", 323, 177;
+		DrawBar "SBARGREN", "SBARBACK", PowerupTime InvulnerabilitySphere, horizontal, interpolate(10), 331, 179;
+	}
+
+	// RADSUIT //
+	//drawnumber 4, SMALLFONT, green, PowerupTime RadSuit, whennotzero, drawshadow, alignment(center), 20, 160, 0;
+	InInventory PowerIronFeet, 1
+	{
+		DrawImage "SBARRADS", 323, 185;
+		DrawBar "SBARWHIT", "SBARBACK", PowerupTime RadSuit, horizontal, interpolate(10), 331, 187;
+	}
+	
+	// INFRARED //
+	//drawnumber 4, SMALLFONT, White, PowerupTime NightVisionGiver, whennotzero, drawshadow, alignment(center), 80, 160, 0;
+	InInventory PowerTorch, 1
+	{
+		DrawImage "SBARINFR", 323, 193;
+		DrawBar "SBARGRAY", "SBARBACK", PowerupTime NightVisionGiver, horizontal, interpolate(10), 331, 195;
+	}
+
+
+	// GRENADES //
+	//drawswitchableimage "GrenadeAmmo", "GRNDC", "GRNDB", 345, 194;
+	//drawimage "GRNDA"
+	//drawnumber 4, SMALLFONT, red, Ammo GrenadeAmmo, whennotzero, drawshadow, alignment(center), 345, 185, 0;
+
+	gamemode deathmatch, teamgame
+		drawnumber 2, HUDFONT_DOOM, untranslated, frags, drawshadow, 138, 171;
+	else
+	{
+		drawimage "STARMS", 104, 168;
+
+		drawswitchableimage weaponslot 2, "STGNUM2", "STYSNUM2", 111, 172;
+		drawswitchableimage weaponslot 3, "STGNUM3", "STYSNUM3", 123, 172;
+		drawswitchableimage weaponslot 4, "STGNUM4", "STYSNUM4", 135, 172;
+		drawswitchableimage weaponslot 5, "STGNUM5", "STYSNUM5", 111, 182;
+		drawswitchableimage weaponslot 6, "STGNUM6", "STYSNUM6", 123, 182;
+		drawswitchableimage weaponslot 7, "STGNUM7", "STYSNUM7", 135, 182;
+
+	}
+
+	InInventory PowerStrength
+		{
+		DrawImage "HASBERK", 143, 168;
+		}
+
+	drawselectedinventory alternateonempty, INDEXFONT, 143, 168
+	{
+
+		InInventory GenderMale, 1
+		{
+		drawmugshot "STM", 5, 143, 168;
+		}
+
+		InInventory GenderFemale, 1
+		{
+		drawmugshot "GAL", 5, 143, 168;
+		}
+	}
+} else {
+	drawimage "STBAR", 0, 168;
+	drawimage "STTPRCNT", 90, 171;
+	drawimage "STTPRCNT", 221, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, health, 90, 171;
+	drawnumber 3, HUDFONT_DOOM, untranslated, armor, 221, 171;
+
+	//keys
+	drawswitchableimage keyslot 2 && 5, "nullimage", "STKEYS0", "STKEYS3", "STKEYS6", 239, 171;
+	drawswitchableimage keyslot 3 && 6, "nullimage", "STKEYS1", "STKEYS4", "STKEYS7", 239, 181;
+	drawswitchableimage keyslot 1 && 4, "nullimage", "STKEYS2", "STKEYS5", "STKEYS8", 239, 191;
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(Clip), 288, 173;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(Shell), 288, 179;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(RocketAmmo), 288, 185;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo(Cell), 288, 191;
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(Clip), 314, 173;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(Shell), 314, 179;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(RocketAmmo), 314, 185;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammocapacity(Cell), 314, 191;
+	gamemode deathmatch, teamgame
+	{
+		drawnumber 2, HUDFONT_DOOM, untranslated, frags, 138, 171;
+	}
+	gamemode cooperative, singleplayer
+	{
+		drawimage "STARMS", 104, 168;
+		drawswitchableimage weaponslot 2, "STGNUM2", "STYSNUM2", 111, 172; 
+		drawswitchableimage weaponslot 3, "STGNUM3", "STYSNUM3", 123, 172;
+		drawswitchableimage weaponslot 4, "STGNUM4", "STYSNUM4", 135, 172;
+		drawswitchableimage weaponslot 5, "STGNUM5", "STYSNUM5", 111, 182;
+		drawswitchableimage weaponslot 6, "STGNUM6", "STYSNUM6", 123, 182;
+		drawswitchableimage weaponslot 7, "STGNUM7", "STYSNUM7", 135, 182;
+	}
+	gamemode cooperative, deathmatch, teamgame
+	{
+		drawimage translatable "STFBANY", 143, 169;
+	}
+	drawselectedinventory alternateonempty, INDEXFONT, 143, 168
+	{
+		drawmugshot "STF", 5, 143, 168;
+	}
+}
+}
+
+statusbar inventory // Standard bar overlay (ZDoom Addition)
+{
+	drawinventorybar Doom, 7, INDEXFONT, 50, 170;
+}
+
+statusbar inventoryfullscreen, fullscreenoffsets // ZDoom HUD overlay.
+{
+	drawinventorybar Doom, translucent, 7, INDEXFONT, -106+center, -31;
+}
+
+StatusBar Fullscreen, FullscreenOffsets {
+	//drawnumber 3, HUDFONT_DOOM, untranslated, ammo2, alignment(center), 43, -29;
+	
+	// HEALTH //////////////////////////////////////////////////////////////////
+	InInventory BD_CrispyHUD_BoomColors {
+		DrawNumber 3, HUDFONT_DOOM, gold, health, 90, -29, 0, red, 25, green, 51;
+		DrawString HUDFONT_DOOM, White, "%", 90, -29, 0, alignment(left);
+	} else {
+		drawnumber 3, HUDFONT_DOOM, untranslated, health, 90, -29;
+		DrawString HUDFONT_DOOM, untranslated, "%", 90, -29, 0, alignment(left);
+	}
+	// ARMOR ///////////////////////////////////////////////////////////////////
+	InInventory BD_CrispyHUD_BoomColors {
+		DrawNumber 3, HUDFONT_DOOM, gold, armor, -99, -29, 0, red, 25, green, 51;
+		DrawString HUDFONT_DOOM, White, "%", -99, -29, 0, alignment(left);
+	} else {
+		drawnumber 3, HUDFONT_DOOM, untranslated, armor, -99, -29;
+		DrawString HUDFONT_DOOM, White, "%", -99, -29, 0, alignment(left);
+	}
+	InInventory BD_CrispyHUD_Armor_Absoption {		
+		DrawNumber 2, SmallFont, untranslated, SavePercent, alignment(right), -99, -12;
+		DrawString SmallFont, untranslated, "%", -99, -12, 0, alignment(left);
+		
+		DrawSwitchableImage ArmorType GiveArmor, "", "HARMSV", -124, -13; 
+		DrawSwitchableImage ArmorType CrueltyBonus5armor, "", "HARMSV", -124, -13; 
+		DrawSwitchableImage ArmorType ArmorShard, "", "HARMSV", -124, -13; 
+		DrawSwitchableImage ArmorType GreenArmor, "", "HARMGR", -124, -13; 
+		DrawSwitchableImage ArmorType LightArmor, "", "HARMGR", -124, -13; 
+		DrawSwitchableImage ArmorType BlueArmor, "", "HARMBL", -124, -13;
+		DrawSwitchableImage ArmorType HeavyArmor, "", "HARMBL", -124, -13;
+	}
+	
+	// MUGSHOT /////////////////////////////////////////////////////////////////
+	InInventory PowerStrength
+		{
+		DrawImage "HASBERK", 143, -32;
+		}
+	
+	drawselectedinventory alternateonempty, INDEXFONT, 143, -32
+	{
+
+		InInventory GenderMale, 1
+		{
+		drawmugshot "STM", 5, 143, -32;
+		}
+
+		InInventory GenderFemale, 1
+		{
+		drawmugshot "GAL", 5, 143, -32;
+		}
+	}
+	
+	// STAMINA ///////////////////////////////////////////////////////////////// 
+	InInventory IsPlayer,1
+	{
+		InInventory Not IsNOTTacticalClass, 1 || InfiniteSprint, 1//Not InfiniteSprint,1 && IsNOTTacticalClass, 1
+		{
+			DrawImage "STAMICON", -12, -42;
+			DrawBar "STAMBAR", "STAMBAR2", Ammo UsedStamina, vertical, reverse, -10, -62;
+		}
+	}
+	
+	// AMMO ////////////////////////////////////////////////////////////////////
+	InInventory not NoReloading,1 || IsPlayingAsPurist,1
+	{
+		UsesSecondaryAmmo
+		{
+			drawnumber 3, SmallFont, untranslated, ammo2, 44, -12;
+			drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, -29;
+		}
+	}
+		
+	InInventory NoReloading,1 || IsPlayingAsPurist,1
+	{
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, -29;
+	}
+	
+	UsesSecondaryAmmo not
+	{
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, -29;
+	}
+
+	IsSelected "TankGun","ArtilleryTankGun"
+	{
+		drawnumber 3, SmallFont, untranslated, ammo2, 44, -12;
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, -29;
+	}
+
+	IsSelected "attackhelicopterGun"
+	{
+		drawnumber 3, SmallFont, untranslated, ammo2, 44, -12;
+		drawnumber 3, HUDFONT_DOOM, untranslated, ammo1, 44, -29;
+	}
+	
+	// EFFECTS /////////////////////////////////////////////////////////////////
+		// INVISIBILITY //
+	//drawnumber 4, SMALLFONT, Blue, PowerupTime BlurSphere, whennotzero, drawshadow, alignment(center), 60, 160, 0;
+	InInventory PowerInvisibility, 1
+	{
+		DrawImage "SBARINVS", -20, -61;
+		DrawImage "SBARBG", -47, -60;
+		DrawBar "SBARRED", "SBARBACK", PowerupTime BlurSphere, horizontal, reverse, interpolate(10), -46, -59;
+	}
+	// INVULNERABILITY //
+	//drawnumber 4, SMALLFONT, Black, PowerupTime InvulnerabilitySphere, drawshadow, whennotzero, alignment(center), 40, 160, 0;
+	InInventory PowerInvulnerable, 1
+	{
+		DrawImage "SBARINVU", -20, -53;
+		DrawImage "SBARBG", -47, -52;
+		DrawBar "SBARGREN", "SBARBACK", PowerupTime InvulnerabilitySphere, horizontal, reverse, interpolate(10), -46, -51;
+	}
+
+	// RADSUIT //
+	//drawnumber 4, SMALLFONT, green, PowerupTime RadSuit, whennotzero, drawshadow, alignment(center), 20, 160, 0;
+	InInventory PowerIronFeet, 1
+	{
+		DrawImage "SBARRADS", -20, -45;
+		DrawImage "SBARBG", -47, -44;
+		DrawBar "SBARWHIT", "SBARBACK", PowerupTime RadSuit, horizontal, reverse, interpolate(10), -46, -43;
+	}
+	
+	// INFRARED //
+	//drawnumber 4, SMALLFONT, White, PowerupTime NightVisionGiver, whennotzero, drawshadow, alignment(center), 80, 160, 0;
+	InInventory PowerTorch, 1
+	{
+		DrawImage "SBARINFR", -20, -37;
+		DrawImage "SBARBG", -47, -36;
+		DrawBar "SBARGRAY", "SBARBACK", PowerupTime NightVisionGiver, horizontal, reverse, interpolate(10), -46, -35;
+	}
+	
+	// LEVEL INFO //////////////////////////////////////////////////////////////
+	InInventory BD_CrispyHUD_Level_Info, 1 {
+		DrawString dsda_BOOMFNT, Untranslated, 		time,  2,  -58, 0, alignment(left);
+		
+		DrawString dsda_BOOMFNT, Red, "K", 2, -52, 0, alignment(left);
+		DrawString dsda_BOOMFNT, Red, "I", 2, -46, 0, alignment(left);
+		DrawString dsda_BOOMFNT, Red, "S", 2, -40, 0, alignment(left);
+	
+		DrawNumber  4, dsda_BOOMFNT, White, kills   , alignment(right), 27, -52;
+		DrawNumber  4, dsda_BOOMFNT, White, items   , alignment(right), 27, -46;
+		DrawNumber  4, dsda_BOOMFNT, White, secrets , alignment(right), 27, -40;
+	
+		DrawString dsda_BOOMFNT, Untranslated, "/", 27, -52, 0, alignment(left);
+		DrawString dsda_BOOMFNT, Untranslated, "/", 27, -46, 0, alignment(left);
+		DrawString dsda_BOOMFNT, Untranslated, "/", 27, -40, 0, alignment(left);
+	
+		DrawNumber  4, dsda_BOOMFNT, White, monsters     , alignment(left), 32, -52;
+		DrawNumber  4, dsda_BOOMFNT, White, totalItems   , alignment(left), 32, -46;
+		DrawNumber  4, dsda_BOOMFNT, White, totalSecrets , alignment(left), 32, -40;
+	}
+	// KEYS ////////////////////////////////////////////////////////////////////
+	// drawkeybar 9, vertical, 10, -81, -29, 0, 3, 10;
+	
+	drawswitchableimage keyslot 2 && 5, "nullimage", "STKEYS0", "STKEYS3", "STKEYS6", -81, -29;
+	drawswitchableimage keyslot 3 && 6, "nullimage", "STKEYS1", "STKEYS4", "STKEYS7", -81, -19;
+	drawswitchableimage keyslot 1 && 4, "nullimage", "STKEYS2", "STKEYS5", "STKEYS8", -81, -9;
+	
+	// FRAGS ///////////////////////////////////////////////////////////////////
+	gamemode deathmatch, teamgame
+	{
+		drawnumber 2, HUDFONT_DOOM, untranslated, frags, 138, -29;
+	} else {
+	
+	// ARMS ////////////////////////////////////////////////////////////////////
+		inInventory IsPlayer,1 {
+			drawswitchableimage weaponslot 1, "STGNUM1", "STYSNUM1", 111, -28;
+			drawswitchableimage weaponslot 2, "STGNUM2", "STYSNUM2", 123, -28;
+			drawswitchableimage weaponslot 3, "STGNUM3", "STYSNUM3", 135, -28;
+			drawswitchableimage weaponslot 4, "STGNUM4", "STYSNUM4", 111, -18;
+			drawswitchableimage weaponslot 5, "STGNUM5", "STYSNUM5", 123, -18;
+			drawswitchableimage weaponslot 6, "STGNUM6", "STYSNUM6", 135, -18;
+			drawswitchableimage weaponslot 7, "STGNUM7", "STYSNUM7", 111, -8;
+			drawswitchableimage weaponslot 8, "STGNUM8", "STYSNUM8", 123, -8;
+			drawswitchableimage weaponslot 9, "STGNUM9", "STYSNUM9", 135, -8;
+		
+			InInventory BD_CrispyHUD_Highlight_Arms, 1 {
+				IsSelected Chain_saw, BrutalAxe { DrawString ARMS_FNT, RED, "1", 111, -28, 0, alignment(left); }				// Chainsaw, Axe
+				IsSelected Melee_Attacks, DSweap { DrawString ARMS_FNT, RED, "1", 111, -28, 0, alignment(left); }				// Melee
+				IsSelected DSweap { DrawString ARMS_FNT, PURPLE, "1", 111, -28, 0, alignment(left); }							// Dragonslayer
+		
+				IsSelected BrutalPistol, DualPistols { DrawString ARMS_FNT, RED, "2", 123, -28, 0, alignment(left); }			// Pistol
+				IsSelected BrutalSMG, DualSMG { DrawString ARMS_FNT, RED, "2", 123, -28, 0, alignment(left); }					// SubMachineGun
+				IsSelected MP40, DualMP40 { DrawString ARMS_FNT, RED, "2", 123, -28, 0, alignment(left); }						// MP40
+				IsSelected Revolver { DrawString ARMS_FNT, RED, "2", 123, -28, 0, alignment(left); }							// Shotvolver
+				IsSelected BrutalDeagle, DualDeagles { DrawString INDEXFONT, TEAL, "2", 123, -28, 0, alignment(left); }			// Dox's Brutal Deaglw
+	
+				IsSelected Shot_Gun, SSG { DrawString ARMS_FNT, RED, "3", 135, -28, 0, alignment(left); }						// 	Shotgun, SSG
+				IsSelected AssaultShotgun { DrawString ARMS_FNT, RED, "3", 135, -28, 0, alignment(left); }						// ASG
+	
+				IsSelected Rifle, DualRifles { DrawString ARMS_FNT, RED, "4", 111, -18, 0, alignment(left); }					// Rifle
+				IsSelected MiniGun, Sniper { DrawString ARMS_FNT, RED, "4", 111, -18, 0, alignment(left); }					// Minigun, Sniper
+				IsSelected MG42 { DrawString ARMS_FNT, RED, "4", 111, -18, 0, alignment(left); }								// MG42
+				IsSelected ElectroRifle { DrawString ARMS_FNT, RED, "4", 111, -18, 0, alignment(left); }						// Cat's Electrorifle'
+				IsSelected DukeNukemRipper { DrawString ARMS_FNT, TEAL, "4", 111, -18, 0, alignment(left); }					// DN3D's Ripper Chaingun
+	
+				IsSelected Rocket_Launcher, GrenadeLauncher { DrawString ARMS_FNT, RED, "5", 123, -18, 0, alignment(left); }	// Rocket/Grenade Launchers
+				IsSelected IncendiaryLauncher, Devastator { DrawString ARMS_FNT, RED, "5", 123, -18, 0, alignment(left); }		// M202 Flash, Devastator
+	
+				IsSelected Plasma_Gun, DualPlasmaRifles { DrawString ARMS_FNT, RED, "6", 135, -18, 0, alignment(left);}		// Plasmagun
+				IsSelected RailGun { DrawString ARMS_FNT, RED, "6", 135, -18, 0, alignment(left);}								// Railgun
+				IsSelected CryoRifle { DrawString ARMS_FNT, CYAN, "6", 135, -18, 0, alignment(left);}							// Cat's Cryorifle
+				IsSelected PlasmaBlaster { DrawString ARMS_FNT, TEAL, "6", 135, -18, 0, alignment(left);}						// Plasma Blaster
+				IsSelected PistolFromCryoRifle
+				{
+					DrawString ARMS_FNT, RED,  "2", 123, -28, 0, alignment(left);
+					DrawString ARMS_FNT, LIGHTBLUE, "6", 135, -18, 0, alignment(left);
+				}
+	
+				IsSelected BIG_FUCKING_GUN, BFG10k { DrawString ARMS_FNT, RED, "7", 111, -8, 0, alignment(left); }				// BFG 9/10k
+				IsSelected CatsFreezer  { DrawString ARMS_FNT, CYAN, "7", 111, -8, 0, alignment(left); }						// Cat's Freeer
+	
+				IsSelected HellishMissileLauncher, Unmaker { DrawString ARMS_FNT, RED, "8", 123, -8, 0, alignment(left); }		// Hellish Missle Launcher, Unmaker
+	
+				IsSelected FlameCannon, Flamethrower2 { DrawString ARMS_FNT, RED, "9", 135, -8, 0, alignment(left); }			// Flamecannon, Flamethrower
+				IsSelected CryoCannon { DrawString ARMS_FNT, CYAN, "9", 135, -8, 0, alignment(left); }							// Cat's Cryocannon	
+				IsSelected PistolFromCryoCannon
+				{
+					DrawString ARMS_FNT, RED,  "2", 123, -28, 0, alignment(left);
+					DrawString ARMS_FNT, LIGHTBLUE, "9", 135, -8, 0, alignment(left);
+				}
+			}
+	
+		// IsSelected HandGrenades { DrawString INDEXFONT, RED, "0", -11, 8, 0; }						// Greenades
+		// IsSelected Freezenades { DrawString INDEXFONT, CYAN, "0", -11, 8, 0; }						// Greenades
+		// IsSelected HandFreezebot, SnowCasterWeapon { DrawString INDEXFONT, CYAN, "0", -11, 8, 0; }	// Freezebot, Show Caster
+		
+		} else {
+			drawswitchableimage weaponslot 2, "STGNUM2", "STYSNUM2", 111, -28;
+			drawswitchableimage weaponslot 3, "STGNUM3", "STYSNUM3", 123, -28;
+			drawswitchableimage weaponslot 4, "STGNUM4", "STYSNUM4", 135, -28;
+			drawswitchableimage weaponslot 5, "STGNUM5", "STYSNUM5", 111, -18;
+			drawswitchableimage weaponslot 6, "STGNUM6", "STYSNUM6", 123, -18;
+			drawswitchableimage weaponslot 7, "STGNUM7", "STYSNUM7", 135, -18;
+		}
+		
+		// gamemode cooperative, deathmatch, teamgame
+		// {
+		//	drawimage translatable "STFBANY", 143, 169;
+		// }
+		// drawselectedinventory alternateonempty, INDEXFONT, 143, 168
+		// {
+		// 	drawmugshot "STF", 5, 143, 168;
+		// }
+	}
+	
+	// ALL AMMO ////////////////////////////////////////////////////////////////
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Clip1, -36, -30;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Clip2, -36, -24;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoShell, -36, -18;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoRocket, -36, -12;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo AmmoCell, -36, -6;
+
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo GrenadeAmmo, -1, -30;
+	InInventory Freezenades { drawnumber 3, INDEXFONT_DOOM, Blue		  , ammo FreezenadeAmmo, -6, -30; }
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Gas, -1, -24;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo MiniHellRocketAmmo, -1, -18;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo SoulAmmo, -1, -12;
+	drawnumber 3, INDEXFONT_DOOM, untranslated, ammo Nuke, -1, -6;
+	
+	// Highlight Ammo / / / / / / / / / / / / / / / / / / / / / / / / / / / / / 
+	InInventory BD_CrispyHUD_Highlight_Ammos, 1 {
+		WeaponAmmo Clip1 {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo Clip1, -36, -30;
+		}
+		WeaponAmmo Clip2 {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo Clip2, -36, -24;
+		}
+		WeaponAmmo AmmoShell {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo AmmoShell, -36, -18;
+		}
+		WeaponAmmo AmmoRocket {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo AmmoRocket, -36, -12;
+		}
+		WeaponAmmo AmmoCell {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo AmmoCell, -36, -6;
+		}
+		WeaponAmmo GrenadeAmmo {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo GrenadeAmmo, -1, -30;
+		}
+		InInventory Freezenades {
+			WeaponAmmo FreezenadeAmmo {
+				drawnumber 3, INDEXFONT_DOOM, LIGHTBLUE, ammo FreezenadeAmmo, -6, -30;
+			}
+		}
+		WeaponAmmo Gas {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo Gas, -1, -24;
+		}
+		WeaponAmmo MiniHellRocketAmmo {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo MiniHellRocketAmmo, -1, -18;
+		}
+		WeaponAmmo SoulAmmo {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo SoulAmmo, -1, -12;
+		}
+		WeaponAmmo Nuke {
+			drawnumber 3, INDEXFONT_DOOM, Red, ammo Nuke, -1, -6;
+		}
+	}
+}
+
+

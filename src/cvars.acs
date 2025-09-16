@@ -1,0 +1,92 @@
+#library "cvars"
+#include "zcommon.acs"
+
+Script "_BD_CrispyHUD_Level_Info" ENTER
+{
+	while (true)
+	{
+		if(GetCVar("bd_crispyhud_level_info") == true)
+		{
+			GiveInventory("BD_CrispyHUD_Level_Info", 1);
+		}
+		
+		else if(GetCVar("bd_crispyhud_level_info") == false)
+		{
+			TakeInventory("BD_CrispyHUD_Level_Info", 1);
+		}
+		Delay(25);
+	}
+}
+
+Script "_BD_CrispyHUD_Armor_Absoption" ENTER
+{
+	while (true)
+	{
+		if(GetCVar("bd_crispyhud_armor_absoption") == true)
+		{
+			if(CheckInventory("Armor") > 0)
+			{
+				GiveInventory("BD_CrispyHUD_Armor_Absoption", 1);
+			} else {
+				TakeInventory("BD_CrispyHUD_Armor_Absoption", 1);
+			}
+		}
+		
+		else if(GetCVar("bd_crispyhud_armor_absoption") == false)
+		{
+			TakeInventory("BD_CrispyHUD_Armor_Absoption", 1);
+		}
+		Delay(25);
+	}
+}
+
+Script "_BD_CrispyHUD_Highlight_Arms" ENTER
+{
+	while (true)
+	{
+		if(GetCVar("bd_crispyhud_highlight_arms") == true)
+		{
+			GiveInventory("BD_CrispyHUD_Highlight_Arms", 1);
+		}
+		
+		else if(GetCVar("bd_crispyhud_highlight_arms") == false)
+		{
+			TakeInventory("BD_CrispyHUD_Highlight_Arms", 1);
+		}
+		Delay(25);
+	}
+}
+
+Script "_BD_CrispyHUD_Highlight_Ammos" ENTER
+{
+	while (true)
+	{
+		if(GetCVar("bd_crispyhud_highlight_ammo") == true)
+		{
+			GiveInventory("BD_CrispyHUD_Highlight_Ammos", 1);
+		}
+		
+		else if(GetCVar("bd_crispyhud_highlight_ammo") == false)
+		{
+			TakeInventory("BD_CrispyHUD_Highlight_Ammos", 1);
+		}
+		Delay(25);
+	}
+}
+
+Script "_BD_CrispyHUD_BoomColors" ENTER
+{
+	while (true)
+	{
+		if(GetCVar("bd_crispyhud_boom_colors") == true)
+		{
+			GiveInventory("BD_CrispyHUD_BoomColors", 1);
+		}
+		
+		else if(GetCVar("bd_crispyhud_boom_colors") == false)
+		{
+			TakeInventory("BD_CrispyHUD_BoomColors", 1);
+		}
+		Delay(25);
+	}
+}

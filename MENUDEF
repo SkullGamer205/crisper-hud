@@ -1,0 +1,12 @@
+OptionMenu "CRISPYHUD_MENU"
+{
+	Title "$BD_CRISPY_HUD_TITLE"
+	StaticText "$BD_CRISPY_HUD_VERSION", 1
+	StaticText " "
+	Option "$BD_CRISPY_ARMOR_ABSOR"			, "bd_crispyhud_armor_absoption"	, "ONOFF"
+	Option "$BD_CRISPY_LEVELINFO"			, "bd_crispyhud_level_info"			, "ONOFF"
+	Option "$BD_CRISPY_HIGHLIGHTARMS"		, "bd_crispyhud_highlight_arms"		, "ONOFF"
+	Option "$BD_CRISPY_HIGHLIGHTAMMOS"		, "bd_crispyhud_highlight_ammo"		, "ONOFF"
+	
+	Option "$BD_CRISPY_BOOM_COLORS"	, "bd_crispyhud_boom_colors"				, "ONOFF"
+}

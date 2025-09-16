@@ -1,0 +1,6 @@
+user bool bd_crispyhud_level_info		= false;	// Level Info
+user bool bd_crispyhud_armor_absoption	= false;	// Armor Absorption
+user bool bd_crispyhud_highlight_arms	= false;	// Highlight ARMS
+user bool bd_crispyhud_highlight_ammo	= false;	// Highlight AMMOs
+user bool bd_crispyhud_show_mugshot		= false;	// Mugshot
+user bool bd_crispyhud_boom_colors		= false;	// Boom Colors

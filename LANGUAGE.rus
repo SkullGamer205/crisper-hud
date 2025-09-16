@@ -1,0 +1,9 @@
+[rus ru]
+
+BD_CRISPY_HUD_TITLE    	= "Настройки Crisper HUD"		;
+BD_CRISPY_HUD_VERSION  	= "v2025.09.16"						;
+BD_CRISPY_ARMOR_ABSOR 	= "Отобразить поглощение брони"		;
+BD_CRISPY_LEVELINFO    	= "Отобразить информацию об уровне"	;
+BD_CRISPY_BOOM_COLORS  	= "Цвета из Boom"					;
+BD_CRISPY_HIGHLIGHTARMS	= "Подсветить текущий ARMS"			;
+BD_CRISPY_HIGHLIGHTAMMOS= "Подсветить текущие патроны"		;
